@@ -44,6 +44,7 @@ const NewTask = ({ classes, setAdd }) => {
 						value={ description }
 						onChange={ e => setDescription( e.target.value ) }
 						required
+						autoFocus
 					/>
 
 					<IconButton 

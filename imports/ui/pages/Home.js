@@ -45,7 +45,7 @@ const Home = () => {
 	const dispatch = useDispatch()
 	const { name, uid } = useSelector(state => state.user)
 	const classes = useStyle()
-	const tasks = useTracker( () => Task.find({ userId: uid }).fetch() ) 
+	const tasks = useTracker( () => Task.find({ userId: uid }, { sort: { createdAt: -1 } }).fetch() ) 
 	
 	const handleLogOut = () => {
 		

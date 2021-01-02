@@ -17,7 +17,9 @@ const EditTask = ({ task, open, handleClose }) => {
 
 	const { uid } = useSelector(state => state.user)
 
-	const handleEditTask = () => {
+	const handleEditTask = ( e ) => {
+
+		e.preventDefault()
 
 		/* Comprobar si es el usuario y existe la tarea */
 		const taskToEdit = Task.findOne({ _id: task._id, userId: uid })
@@ -31,7 +33,7 @@ const EditTask = ({ task, open, handleClose }) => {
 			})
 
 			Swal.fire({
-				timer: 2000,
+				timer: 1000,
 				title: 'Tarea editada',
 				showConfirmButton: false,
 				icon: 'success'
@@ -56,29 +58,31 @@ const EditTask = ({ task, open, handleClose }) => {
 	return (
 
 		<div>
-			<Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+			<Dialog fullWidth open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
 				<DialogTitle id="form-dialog-title">Editar tarea</DialogTitle>
-
-				<DialogContent>
-					<TextField
-						autoFocus
-						margin="dense"
-						id="decription"
-						label="Tarea"
-						type="text"
-						fullWidth
-						value={ description }
-						onChange={ e => setDescription( e.target.value ) }
-					/>
-				</DialogContent>
-				<DialogActions>
-				<Button onClick={handleClose} color="secondary">
-					Cancelar
-				</Button>
-				<Button onClick={ handleEditTask } color="primary" variant='contained' disableElevation >
-					Editar
-				</Button>
-				</DialogActions>
+				<form onSubmit={ e => handleEditTask( e ) } >
+					<DialogContent>
+						<TextField
+							autoFocus
+							margin="dense"
+							id="decription"
+							label="Tarea"
+							type="text"
+							fullWidth
+							value={ description }
+							onChange={ e => setDescription( e.target.value ) }
+							required
+						/>
+					</DialogContent>
+					<DialogActions>
+						<Button onClick={handleClose} color="default">
+							Cancelar
+						</Button>
+						<Button type='submit' color="primary" variant='contained' disableElevation >
+							Editar
+						</Button>
+					</DialogActions>
+				</form>
 			</Dialog>
 		</div>
 	)

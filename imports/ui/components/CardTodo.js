@@ -56,7 +56,7 @@ const CardTodo = ({ classes, item }) => {
 
 					Task.remove({ _id: task._id })
 					Swal.fire({
-						timer: 2000,
+						timer: 1000,
 						title: 'Tarea eliminada',
 						showConfirmButton: false,
 						icon: 'success'
